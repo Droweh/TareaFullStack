@@ -11,3 +11,5 @@ Finalmente en la descripción pondrás más a detalle que es lo que hiciste.
 
 ejemplo de un buen título de commit:
 +[index.html|index.css]
+
+Puedes titular tus commits en base al requerimiento que hiciste tipo si hiciste RNF-01 & RF-03
