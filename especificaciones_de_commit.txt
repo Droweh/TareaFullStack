@@ -1,0 +1,13 @@
+Para cada página/funcionalidad nueva se hará una nueva rama. Por ejemplo, si vas a hacer la landing page haces una nueva rama llamada "landing_page" que la haces a base de main, luego cuando termines le haces el merge
+
+Para los commit lo que deben hacer es indicar si agregaron, eliminaron, o actualizaron los archivos
+
+# actualizar
++ agregar
+- eliminar
+
+Luego tienes que especificar qué archivos agregaste/eliminaste/modificaste
+Finalmente en la descripción pondrás más a detalle que es lo que hiciste.
+
+ejemplo de un buen título de commit:
++[index.html|index.css]
