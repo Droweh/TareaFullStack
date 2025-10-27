@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front/src/css/barraNavegacion.css">
+    <link rel="stylesheet" href="/Front/src/css/login&register.css">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <nav>
+        <div class="contenedor-nav">
+            <a href="/Front/index.html" class="logo">Gestor de Tareas</a>
+            <div class="enlaces-nav">
+                <a href="/Front/index/index.html">Inicio</a>
+                <a href="/Front/workspace/workspace.html">Tablero</a>
+                <a href="/Front/login&register/login.html">Iniciar Sesion</a>
+                <a href="/Front/login&register/register.html">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contenedor-formulario">
+        <div class="caja-formulario">
+            <h2>Iniciar Sesión</h2>
+            <form>
+                <div class="campo">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="********" required>
+                </div>
+                <button type="submit" class="boton-enviar">Entrar</button>
+            </form>
+            <p class="texto-cambio">¿No tienes cuenta? <a href="/Front/register.html">Regístrate aquí</a></p>
+        </div>
+    </div>
+</body>
+</html>
