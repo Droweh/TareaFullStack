@@ -1,0 +1,26 @@
+services:
+  webserver:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    container_name: apache_web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../www:/var/www/html
+    restart: unless-stopped
+
+  database:
+    image: mariadb:latest
+    container_name: task_db
+    environment:
+      MYSQL_ROOT_PASSWORD: taskertasking
+      MYSQL_DATABASE: task_db
+      MYSQL_USER: tasker
+      MYSQL_PASSWORD: taskertasking
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../sql:/docker-entrypoint-initdb.d
+    restart: unless-stopped
