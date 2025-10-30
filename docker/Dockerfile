@@ -13,7 +13,7 @@ RUN a2enmod rewrite ssl
 COPY apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Ajustar permisos
-RUN chown -R www-data:www-data /var/www/html /php
+RUN chown -R www-data:www-data /var/www/html
 
 # Exponer puertos
 EXPOSE 80 443
