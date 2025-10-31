@@ -1,8 +1,8 @@
 <?php
-$filtroMetodoPost = new GError(
+$filtroMetodoPost = new Datawall(
     "Método HTTP",
-    GError::forbidden,
-    GError::inclusive,
+    Datawall::forbidden,
+    Datawall::inclusive,
     [
         "Metodo invalido" => fn($input) => $input === "POST"
     ],
@@ -11,10 +11,10 @@ $filtroMetodoPost = new GError(
     "El metodo utilizado para la solicitud es invalido. Por favor use POST"
 );
 
-$filtroMetodoGet = new GError(
+$filtroMetodoGet = new Datawall(
     "Método HTTP",
-    GError::forbidden,
-    GError::inclusive,
+    Datawall::forbidden,
+    Datawall::inclusive,
     [
         "metodo_invalido" => fn($input) => $input === "GET"
     ],
@@ -23,10 +23,10 @@ $filtroMetodoGet = new GError(
     "El metodo utilizado para la solicitud es invalido. Por favor use GET"
 );
 
-$filtroBodyJSON = new GError(
+$filtroBodyJSON = new Datawall(
     "Body JSON", 
-    GError::forbidden,
-    GError::inclusive,
+    Datawall::forbidden,
+    Datawall::inclusive,
     [
         "json_invalido" => function($input) {
             try {
@@ -42,20 +42,20 @@ $filtroBodyJSON = new GError(
     "El formato de entrada no es valido"
 );
 
-$filtroSesionActiva = new GError(
+$filtroSesionActiva = new Datawall(
     "Sesión Activa",
-    GError::forbidden,
-    GError::exclusive,
+    Datawall::forbidden,
+    Datawall::exclusive,
     [
         "Ya tienes acceso actual a esta cuenta" => function($input) {
-            if (!isset($_COOKIE["golden-token"])) {
+            if (!isset($_COOKIE["token"])) {
                 return false;
             }
             
-            $token = $_COOKIE["golden-token"];
+            $token = $_COOKIE["token"];
             try {
                 $credentials = $input["perfil"]->getUserCredentials($token);
-                return $credentials["result"]["username"] === $input['username'];
+                return $credentials["result"]["correo"] === $input['correo'];
             } catch (Exception $e) {
                 return false;
             }
@@ -66,12 +66,12 @@ $filtroSesionActiva = new GError(
     "Ya existe una sesion activa para el nombre usuario brindado"
 );
 
-$filtroTokenSesion = new GError(
+$filtroTokenSesion = new Datawall(
     "Token Sesión",
-    GError::notFound,
-    GError::inclusive,
+    Datawall::notFound,
+    Datawall::inclusive,
     [
-        fn() => isset($_COOKIE["golden-token"]) && !empty(trim($_COOKIE["golden-token"]))
+        fn() => isset($_COOKIE["token"]) && !empty(trim($_COOKIE["token"]))
     ],
     "Validación Token Sesión",
     true,

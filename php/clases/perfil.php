@@ -1,4 +1,6 @@
 <?php
+include "database.php";
+
 class Perfil extends Database {
 
     private Datawall $filtroRegistro;
@@ -7,7 +9,6 @@ class Perfil extends Database {
     public function __construct() {
         parent::__construct("database", "gbloomer", "gbloom_db", "goldenblosser", 3306);
     
-        // CAMBIAR ESTO YAAAAAAAA
         $this->filtroRegistro = new Datawall(
             "Filtro de Registro",
             Datawall::forbidden,
