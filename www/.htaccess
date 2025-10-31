@@ -1,0 +1,3 @@
+RewriteEngine On
+
+RewriteRule ^$ /Front/index/index.html [R=302,L]

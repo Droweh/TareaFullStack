@@ -1,5 +1,5 @@
-053225 Dark Green
-66A86 Purple gray
-DEE5E5 Platinum
-3D0B37 Dark Purple
-63264A Violet
+#053225 Dark Green
+#666A86 Purple gray
+#DEE5E5 Platinum
+#3D0B37 Dark Purple
+#63264A Violet
