@@ -1,84 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="titulo">Registro</title>
-
-    <link rel="stylesheet" href="../src/css/general.css">
+    <link rel="stylesheet" href="../src/css/barraNavegacion.css">
     <link rel="stylesheet" href="../src/css/login&register.css">
+    <title>Iniciar Sesión</title>
 </head>
 <body>
-    <header class="main-header">
-        <div class="logo-container">
-            <img src="" alt="FVR">
+    <nav>
+        <div class="contenedor-nav">
+            <h2>Gestor de Tareas</h2>
+            <div class="enlaces-nav">
+                <a href="../index/index.html">Inicio</a>
+                <a href="../workspace/workspace.html">Tablero</a>
+                <a href="../login&register/login.html">Iniciar Sesion</a>
+                <a href="../login&register/register.html">Registrarse</a>
+            </div>
         </div>
-    </header>
-    <div class="form-container" id="loginForm">
-        <header class="form-header">
-            <h1>Login</h1>
-        </header>
-        
-        <form action="" method="POST">
-            <label for="usuario">Nombre de usuario</label>
-            <input type="text" name="usuario" id="usuario">
-            <label for="contraseña">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña">
-            <input type="submit">
-        </form>
-    </div>
-    <div class="form-container hidden" id="registerForm">
-        <header class="form-header">
-            <h1>Register</h1>
-        </header>
-        
-        <form action="" method="POST">
-            <label for="usuario">Nombre de usuario</label>
-            <input type="text" name="usuario" id="usuario">
-            <label for="contraseña">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña">
-            <input type="submit">
-        </form>
-    </div>
+    </nav>
 
-    <footer class="form-footer">
-        <hr>
-        <div class="row">
-            <button id="loginBtn">Login</button>
-            <button id="registerBtn">Register</button>
+    <div class="contenedor-formulario">
+        <div class="caja-formulario">
+            <h2>Iniciar Sesión</h2>
+            <form>
+                <div class="campo">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="campo">
+                    <label>Contraseña</label>
+                    <input type="password" placeholder="********" required>
+                </div>
+                <button type="submit" class="boton-enviar">Entrar</button>
+            </form>
+            <p class="texto-cambio">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
         </div>
-    </footer>
-    <script>
-        const registerForm = document.getElementById("registerForm");
-        const loginForm = document.getElementById("loginForm");
-        const loginBtn = document.getElementById("loginBtn");
-        const registerBtn = document.getElementById("registerBtn");
-
-        let currentForm = "register"; //defaultState
-        function switchForms(currentForm){
-            if(currentForm === "login"){
-                registerForm.classList.add("hidden");
-                loginForm.classList.remove("hidden");
-
-                loginBtn.classList.add("active");
-                registerBtn.classList.remove("active");
-            }else if(currentForm === "register"){
-                registerForm.classList.remove("hidden");
-                loginForm.classList.add("hidden");
-
-                registerBtn.classList.add("active");
-                loginBtn.classList.remove("active");
-            }
-        }
-        switchForms(currentForm);
-        loginBtn.addEventListener("click", () =>{
-            currentForm = "login";
-            switchForms(currentForm);
-        })
-        registerBtn.addEventListener("click", () =>{
-            currentForm = "register";
-            switchForms(currentForm);
-        })
-    </script>
+    </div>
 </body>
 </html>
