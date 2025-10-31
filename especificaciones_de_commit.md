@@ -1,5 +1,3 @@
----
-
 # Especificaciones de Commit
 
 ## Estructura general
