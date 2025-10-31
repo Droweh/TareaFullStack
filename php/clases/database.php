@@ -53,6 +53,27 @@ class Database {
             true,
             "El usuario indexado no se encuentra en la base de datos"
         );
+
+        $this->expiration = new Datawall(
+            "Expiration Filter",
+            GError::unauthorized,
+            GError::exclusive,
+            [
+                "link_expirado" => function (array $input): bool {
+                        if (new DateTime($input["expira"]) < new DateTime()) {
+                            $accion = $this->pdo->prepare("delete from codigo_temporal where codigo = :codigo;");
+                            $accion->execute(["codigo" => $input["codigo"]]);
+
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+            ],
+            "Expiration Filter",
+            true,
+            "El link de invitacion ha alcanzado su fecha de expiracion"
+        );
     }
 
     public function getUserCredentials(string $token): array {
@@ -91,13 +112,13 @@ class Database {
     }
 
     public function verificarCodigoAcceso(string $codigo): array {
-        $solicitud = $this->pdo->prepare("select correo from codigo_temporal where codigo = :codigo");
+        $solicitud = $this->pdo->prepare("select correo, expira from codigo_temporal where codigo = :codigo");
         $solicitud->execute(["codigo" => $codigo]);
 
         $this->notFound->setOrigin("Perfil->verificarCodigoAcceso()");
-        $this->notFound->setErrMessage("Codigo de activacion invalido");
+        $this->notFound->setErrMessage("Link de invitacion invalido");
         $solicitud = $this->notFound->filter($solicitud->fetch());
-
+        $this->expiration->filter(["codigo" => $codigo, "expira" => $solicitud["expira"]]);
 
         return $this->returnSuccess($solicitud["correo"]);
     }
