@@ -91,11 +91,9 @@ class Lista extends Tablero {
     public function getLista(string $token, string $lista, int $tableroId): array {
         $this->isColaborador($token, $tableroId);
 
-        $this->notFound->setOrigin("Lista->getLista()");
-        $this->notFound->setErrMessage("No hay tareas en la lista solicitada");
         $solicitud = $this->pdo->prepare("select * from tarea where lista = :lista and tableroId = :tableroId;");
         $solicitud->execute(["lista" => $lista, "tableroId" => $tableroId]);
-        $lista = $this->notFound->filter($solicitud->fetchAll());
+        $lista = $solicitud->fetchAll();
 
         return $this->returnSuccess($lista);
     }
