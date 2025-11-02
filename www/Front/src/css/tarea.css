@@ -72,7 +72,6 @@
   width: fit-content;
 }
 
-/* Colores según estado */
 .tarea-estado.pendiente { background-color: #f8d7da; color: #842029; }
 .tarea-estado.progreso  { background-color: #fff3cd; color: #664d03; }
 .tarea-estado.completa  { background-color: #d1e7dd; color: #0f5132; }
@@ -109,7 +108,6 @@
   background-color: #5c1a1a;
 }
 
-/* Responsivo */
 @media (max-width: 600px) {
   .tarea {
     flex-direction: column;

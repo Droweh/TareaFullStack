@@ -1,0 +1,64 @@
+.tablero-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tablero-detalles {
+  display: flex;
+  flex-direction: column;
+}
+
+.tablero-titulo {
+  margin: 0;
+  font-size: 16px;
+  color: #3D0B37;
+}
+
+.tablero-estado.pendiente { background-color: #f8d7da; color: #842029; }
+.tablero-estado.progreso  { background-color: #fff3cd; color: #664d03; }
+.tablero-estado.completa  { background-color: #d1e7dd; color: #0f5132; }
+
+.tablero-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.tablero-acciones button {
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.btn-editar {
+  background-color: #63264A;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background-color: #3D0B37;
+}
+
+.btn-eliminar {
+  background-color: #842029;
+  color: #fff;
+}
+
+.btn-eliminar:hover {
+  background-color: #5c1a1a;
+}
+
+@media (max-width: 600px) {
+  .tablero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .tablero-acciones {
+    align-self: flex-end;
+  }
+}
