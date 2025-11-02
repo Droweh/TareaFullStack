@@ -1,5 +1,4 @@
 <?php
-include "database.php";
 
 class Perfil extends Database {
 
@@ -7,7 +6,7 @@ class Perfil extends Database {
     private Datawall $filtroAcceso;
 
     public function __construct() {
-        parent::__construct("database", "gbloomer", "gbloom_db", "goldenblosser", 3306);
+        parent::__construct("database", "tasker", "task_db", "taskertasking", 3306);
     
         $this->filtroRegistro = new Datawall(
             "Filtro de Registro",
@@ -67,7 +66,7 @@ class Perfil extends Database {
 
         $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 
-        $insertar = $this->pdo->prepare("insert into usuario(nombre, apellido, correo, contraseña) values (:nombre, :apellido, :correo, :contraseña;");
+        $insertar = $this->pdo->prepare("insert into usuario(nombre, apellido, correo, contraseña) values (:nombre, :apellido, :correo, :contrasena);");
         $insertar->execute(["nombre" => $nombre, "apellido" => $apellido, "correo" => $correo, "contrasena" => $contraseña]);
 
         return $this->returnSuccess(null);
@@ -98,8 +97,9 @@ class Perfil extends Database {
 
         $token = $this->generarToken();
         $ahora = new DateTime();
+        $ahora = $ahora->format("Y-m-d H:m:s");
 
-        $insertar = $this->pdo->prepare("insert into sesion(token, correo, fecha) values (:token, :corre, :fecha);");
+        $insertar = $this->pdo->prepare("insert into sesion(token, correo, fecha) values (:token, :correo, :fecha);");
         $insertar->execute(["correo" => $correo, "token" => $token, "fecha" => $ahora]);
 
         return $this->returnSuccess($token);

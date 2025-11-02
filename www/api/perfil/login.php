@@ -1,6 +1,6 @@
 <?php
-include "../../../php/complementos/includeAll.php";
-include "../../../php/complementos/filters.php";
+include "../../php/complementos/includeAll.php";
+include "../../php/complementos/filters.php";
 
 $perfil = new Perfil();
 
@@ -35,7 +35,7 @@ try {
     }
     
     $login = $perfil->accederUsuario($correo, $contraseña);
-    $token = $login["result"]["token"];
+    $token = $login["result"];
     $expira = time() + 365 * 24 * 60 * 60;
     
     setcookie('token', $token, [

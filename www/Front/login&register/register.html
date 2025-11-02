@@ -14,7 +14,7 @@
             <div class="enlaces-nav">
                 <a href="../index/index.html">Inicio</a>
                 <a href="../workspace/workspace.html">Tableros</a>
-                <a href="../login&register/login.html">Iniciar Sesion</a>
+                <a id="perfil" href="../login&register/login.html">Iniciar Sesion</a>
                 <a href="../login&register/register.html">Registrarse</a>
             </div>
         </div>
@@ -26,24 +26,27 @@
             <form>
                 <div class="campo">
                     <label>Nombre</label>
-                    <input type="text" placeholder="Benjamin" required>
+                    <input id="nombre" type="text" placeholder="Benjamin" required>
                 </div>
                 <div class="campo">
                     <label>Apellido</label>
-                    <input type="text" placeholder="Ferrigna" required>
+                    <input id="apellido" type="text" placeholder="Ferrigna" required>
                 </div>
                 <div class="campo">
                     <label>Correo Electrónico</label>
-                    <input type="email" placeholder="benjaminferrigna@gmail.com" required>
+                    <input id="correo" type="email" placeholder="benjaminferrigna@gmail.com" required>
                 </div>
                 <div class="campo">
                     <label>Contraseña</label>
-                    <input type="password" placeholder="********" required>
+                    <input id="contraseña" type="password" placeholder="********" required>
                 </div>
                 <button type="submit" class="boton-enviar">Registrarse</button>
             </form>
             <p class="texto-cambio">¿Ya tienes cuenta? <a href="../login&register/login.html">Inicia sesión aquí</a></p>
         </div>
     </div>
+
+    <script src="../src/js/register.js"></script>
+    <script src="../src/js/nav.js"></script>
 </body>
 </html>

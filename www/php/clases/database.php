@@ -56,8 +56,8 @@ class Database {
 
         $this->expiration = new Datawall(
             "Expiration Filter",
-            GError::unauthorized,
-            GError::exclusive,
+            Datawall::unauthorized,
+            Datawall::exclusive,
             [
                 "link_expirado" => function (array $input): bool {
                         if (new DateTime($input["expira"]) < new DateTime()) {
@@ -77,12 +77,12 @@ class Database {
     }
 
     public function getUserCredentials(string $token): array {
-        $solicitud = $this->pdo->prepare("select username, expira, fecha, mantener from sesion where token = :token;");
+        $solicitud = $this->pdo->prepare("select correo from sesion where token = :token;");
         $solicitud->execute(["token" => $token]);
         $userinfo = $this->invalidToken->filter($solicitud->fetch());
 
-        $solicitud = $this->pdo->prepare("select * from usuario where username = :username;");
-        $solicitud->execute(["username" => $userinfo["username"]]);
+        $solicitud = $this->pdo->prepare("select * from usuario where correo = :correo;");
+        $solicitud->execute(["correo" => $userinfo["correo"]]);
 
         $this->notFound->setOrigin("Database->getUserCredentials()");
         $usuario = $this->notFound->filter($solicitud->fetch());

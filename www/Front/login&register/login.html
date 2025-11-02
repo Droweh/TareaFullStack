@@ -14,7 +14,7 @@
             <div class="enlaces-nav">
                 <a href="../index/index.html">Inicio</a>
                 <a href="../workspace/workspace.html">Tableros</a>
-                <a href="../login&register/login.html">Iniciar Sesion</a>
+                <a id="perfil" href="../login&register/login.html">Iniciar Sesion</a>
                 <a href="../login&register/register.html">Registrarse</a>
             </div>
         </div>
@@ -26,16 +26,19 @@
             <form>
                 <div class="campo">
                     <label>Correo Electrónico</label>
-                    <input type="email" placeholder="benjaminferrigna@gmail.com" required>
+                    <input id="correo" type="email" placeholder="benjaminferrigna@gmail.com" required>
                 </div>
                 <div class="campo">
                     <label>Contraseña</label>
-                    <input type="password" placeholder="********" required>
+                    <input id="contraseña" type="password" placeholder="********" required>
                 </div>
                 <button type="submit" class="boton-enviar">Entrar</button>
             </form>
             <p class="texto-cambio">¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
         </div>
     </div>
+
+    <script src="../src/js/nav.js"></script>
+    <script src="../src/js/login.js"></script>
 </body>
 </html>
