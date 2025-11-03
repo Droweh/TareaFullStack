@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero</title>
+    <link rel="stylesheet" href="../src/css/dashboard.css">   
+    <link rel="stylesheet" href="../src/css/barraNavegacion.css">
+    <link rel="stylesheet" href="../src/css/tablero.css">
+
+</head>
+<body>
+    <nav>
+        <div class="contenedor-nav">
+            <h2>Gestor de tableros</h2>
+            <div class="enlaces-nav">
+                <a href="../index/index.html">Inicio</a>
+                <a href="../workspace/dashboard.html">Tableros</a>
+                <a id="perfil" href="../login&register/login.html">Iniciar Sesion</a>
+                <a href="../login&register/register.html">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Tableros Colaborativos</h1>
+
+    <div id="lista" class="container">
+        <div class="container">
+            <div class="tablero-info">
+                <div class="tablero-detalles">
+                <a href="workspace.html">
+                <span class="tablero-titulo">Tablero personal de Ariel</span>
+                </a>
+                </div>
+            </div>
+            <div class="tablero-acciones">
+                <button class="editar">✏️</button>
+                <button class="eliminar">🗑️</button>
+            </div>
+        </div>
+        <div class="addContainer">+</div>
+    </div>
+
+    <script src="../src/js/nav.js"></script>
+    <script src="../src/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="../src/css/barraNavegacion.css">
+    <link rel="stylesheet" href="../src/css/workspace.css">
+
+</head>
+<body>
+    <nav>
+        <div class="contenedor-nav">
+            <h2>Gestor de tareas</h2>
+            <div class="enlaces-nav">
+                <a href="../index/index.html">Inicio</a>
+                <a href="../workspace/dashboard.html">Tableros</a>
+                <a id="perfil" href="../login&register/login.html">Iniciar Sesion</a>
+                <a href="../login&register/register.html">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+    
+    <button>Cerrar Sesion</button>
+
+    <script>
+        document.querySelector("button").addEventListener("click", async () => {
+            const accion = await fetch("/api/perfil/logout.php").then((respuesta) => {
+                return respuesta.json();
+            });
+
+            if (accion.status == "success") {
+                window.location = "/Front/index/index.html";
+            }
+        })
+    </script>
+</body>
+</html>

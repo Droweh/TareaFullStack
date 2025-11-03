@@ -4,29 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tablero</title>
-    <link rel="stylesheet" href="../src/css/workspace.css">      
+    <link rel="stylesheet" href="../src/css/workspace.css">   
     <link rel="stylesheet" href="../src/css/barraNavegacion.css">
+    <link rel="stylesheet" href="../src/css/tarea.css">
 
 </head>
 <body>
-
-<nav>
-    <div class="contenedor-nav">
-        <h2>Gestor de tareas</h2>
-        <div class="enlaces-nav">
-            <a href="../index/index.html">Inicio</a>
-            <a href="../workspace/workspace.html">Tablero</a>
-            <a href="../login&register/login.html">Iniciar Sesion</a>
-            <a href="../login&register/register.html">Registrarse</a>
+    <nav>
+        <div class="contenedor-nav">
+            <h2>Gestor de tareas</h2>
+            <div class="enlaces-nav">
+                <a href="../index/index.html">Inicio</a>
+                <a href="../workspace/dashboard.html">Tableros</a>
+                <a id="perfil" href="../login&register/login.html">Iniciar Sesion</a>
+                <a href="../login&register/register.html">Registrarse</a>
+            </div>
         </div>
-    </div>
-</nav>
-    <h1>Mi Tablero Simple</h1>
+    </nav>
 
-    <div class="parent">
-        <div class="div1"> </div>
-        <div class="div2"> </div>
-        <div class="div3"> </div>
+    <h1>Tablero Personal</h1>
+
+    <div class="container">
+        <div class="container">
+            <h2 style="margin: 0;">Realizando</h2>
+            <ul class="tareas">
+                <li>
+                <div class="tarea">
+                <div class="tarea-info">
+                    <input type="checkbox" />
+                    <div class="tarea-detalles">
+                    <span class="tarea-titulo">Estudiar para el examen</span>
+                    <span class="tarea-estado">Pendiente</span>
+                    </div>
+                </div>
+                <div class="tarea-acciones">
+                    <button class="editar">✏️</button>
+                    <button class="eliminar">🗑️</button>
+                </div>
+                </div>
+                </li>
+
+                <li>
+                <div class="tarea">
+                <div class="tarea-info">
+                    <input type="checkbox" />
+                    <div class="tarea-detalles">
+                    <span class="tarea-titulo">Estudiar para el examen</span>
+                    <span class="tarea-estado">Pendiente</span>
+                    </div>
+                </div>
+                <div class="tarea-acciones">
+                    <button class="editar">✏️</button>
+                    <button class="eliminar">🗑️</button>
+                </div>
+                </div>
+                </li>
+
+                <li>
+                <div class="tarea">
+                <div class="tarea-info">
+                    <input type="checkbox" />
+                    <div class="tarea-detalles">
+                    <span class="tarea-titulo">Estudiar para el examen</span>
+                    <span class="tarea-estado">Pendiente</span>
+                    </div>
+                </div>
+                <div class="tarea-acciones">
+                    <button class="editar">✏️</button>
+                    <button class="eliminar">🗑️</button>
+                </div>
+                </div>
+                </li>
+            </ul>
+        </div>
+        <div class="addContainer">+</div>
     </div>
+
+    <script src="../src/js/nav.js"></script>
 </body>
 </html>

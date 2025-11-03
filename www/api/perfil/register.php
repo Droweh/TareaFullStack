@@ -1,6 +1,6 @@
 <?php
-include "../../../php/complementos/includeAll.php";
-include "../../../php/complementos/filters.php";
+include "../../php/complementos/includeAll.php";
+include "../../php/complementos/filters.php";
 
 $perfil = new Perfil();
 $request = $_SERVER["REQUEST_METHOD"];

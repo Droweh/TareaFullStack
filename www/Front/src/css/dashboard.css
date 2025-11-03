@@ -5,7 +5,6 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -45,6 +44,7 @@ h1 {
     height: max-content;
     overflow-x: auto;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 .container > div.container {

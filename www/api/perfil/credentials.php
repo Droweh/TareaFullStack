@@ -1,5 +1,5 @@
 <?php
-include "includeAll.php";
+include "../../php/complementos/includeAll.php";
 
 $perfil = new Perfil();
 try {
