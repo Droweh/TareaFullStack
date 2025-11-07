@@ -57,5 +57,5 @@ create table tarea (
     fechaFin date,
     duracion int,
     primary key (titulo, lista),
-    foreign key (lista, tableroId) references lista(titulo, tableroId)
+    foreign key (tableroId, lista) references lista(tableroId, titulo)
 );
