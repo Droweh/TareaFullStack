@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="../src/css/barraNavegacion.css">
-    <link rel="stylesheet" href="../src/css/workspace.css">
+    <link rel="stylesheet" href="../src/css/specialBtn.css">
+    <link rel="stylesheet" href="../src/css/profile.css">
 
+    <style>
+       
+    </style>
+    
 </head>
 <body>
     <nav>
@@ -20,8 +25,42 @@
             </div>
         </div>
     </nav>
+    <main class="profile-main">
+        <div class="profile-container">
+            <div class="profile-backdrop">
+                <header class="profile-header">
+                    <div class="profile-pic-container">
+                        <img src="../../Recursos/pic.png">
+                    </div>
+                    <h1 id="editable">Nombre de usuario</h1>
+                    <div class="editBtn btn">
+                        ✎
+                    </div>
+                </header>
+                <main class="profile-body">
+                    <div class="row">
+                        <h3>Email: </h3>
+                        <span id="editable">colocarEmailAca</span>
+                        <div class="editBtn btn bodyEdit">✎</div>
+                    </div>
+                    <div class="row">
+                        <h3>Apellido: </h3>
+                        <span id="editable">ColocarApellidoAca</span>
+                        <div class="editBtn btn bodyEdit">✎</div>
+                    </div>
+                    
+                    <button class="edit-pass btn">Cambiar Contraseña</button>
+                </main>
+                <footer class="profile-footer">
+                    <button class="close-session btn" id="closesessBtn">Cerrar Sesion</button>
+                    <button class="delete-acc btn" id="delaccBtn">Eliminar Cuenta</button>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+
     
-    <button>Cerrar Sesion</button>
 
     <script>
         document.querySelector("button").addEventListener("click", async () => {
@@ -33,6 +72,37 @@
                 window.location = "/Front/index/index.html";
             }
         })
+
+        const editButtons = document.querySelectorAll(".editBtn");
+
+        editButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const editable = button.parentElement.querySelector("#editable");
+               
+                if(!editable) return;
+                const tag = editable.tagName;
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = editable.textContent;
+
+                editable.replaceWith(input);
+                input.focus();
+
+                input.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') {
+                        const newElement = document.createElement(tag);
+                        newElement.id = 'editable';
+                        newElement.textContent = input.value;
+                        input.replaceWith(newElement);
+                    }
+                });
+            });
+        });
+
+        const editPassBtn = document.querySelector("edit-pass");
+        editPassBtn.addEventListener("click", () =>{
+            alert("Under construction...");
+        });
     </script>
 </body>
 </html>

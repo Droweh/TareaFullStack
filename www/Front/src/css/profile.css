@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+    background-image: url(../../../Recursos/background.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 40vw;
+    border-radius: 10px;
+    border: 10px solid #053225;
+    background-color: #053225;
+}
+.profile-backdrop{
+    background-color: #666A86;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profile-header{
+    width: 90%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border-radius: 10px;
+    border: 5px solid #dee5e59c;
+
+}
+
+.profile-main{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-footer{
+    height: 15%;
+    width: 70%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.profile-body{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+.profile-pic-container{
+    height: 100%;
+    width: auto;
+}
+.profile-pic-container img{
+    height: 100%;
+    width: auto;
+}
+.close-session{
+    --btn-bg: #63264A;
+    background-color: #63264A;
+    color: white;
+}
+.delete-acc{
+    --btn-bg: #3D0B37;
+    background-color: #3D0B37;
+    color: white;
+}
+.edit-pass{
+    --btn-bg: #053225;
+    background-color: #053225;
+    color: white;
+}
+.editBtn{
+    height: 2.5rem !important;
+    width: 2.5rem !important;
+    border-radius: 50% !important;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 2rem;
+    background-color: #DEE5E5;
+    --btn-bg: #DEE5E5;
+}
+.bodyEdit{
+    font-size: 2rem;
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+    padding: 10px;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    width: 100%;
+    padding: 5px;
+
+}
