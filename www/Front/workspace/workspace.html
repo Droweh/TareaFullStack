@@ -4,10 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tablero</title>
+    <link rel="stylesheet" href="../src/css/specialBtn.css">
     <link rel="stylesheet" href="../src/css/workspace.css">   
     <link rel="stylesheet" href="../src/css/barraNavegacion.css">
-    <link rel="stylesheet" href="../src/css/tarea.css">
+    <style>
+        .list{
+            background-color: #DEE5E5;
+            height:fit-content;
+            width: fit-content;
+            min-width: 10vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 15px;
+            gap: 5px;
+            padding: 10px;
+        }
+        .listHeader{
+            height: fit-content;
+            width: 100%;
+            font-size: 24px;
+        }
+        .listHeader p {
+            margin: 0;
+        }
+        .listBody{
+            height: 100%;
+            width: 100%;
+        }
+        .tasks{
+            margin: 0;
+            padding: 0;
 
+            list-style: none;
+        }
+        .main-workspace .btn{
+            padding: 15px 15px;
+            width: 150px;
+            font-size: 12px;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+        }
+        .titleInput{
+            border-radius: 10px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -21,65 +65,26 @@
             </div>
         </div>
     </nav>
-
-    <h1>Tablero Personal</h1>
-
-    <div class="container">
-        <div class="container">
-            <h2 style="margin: 0;">Realizando</h2>
-            <ul class="tareas">
-                <li>
-                <div class="tarea">
-                <div class="tarea-info">
-                    <input type="checkbox" />
-                    <div class="tarea-detalles">
-                    <span class="tarea-titulo">Estudiar para el examen</span>
-                    <span class="tarea-estado">Pendiente</span>
-                    </div>
-                </div>
-                <div class="tarea-acciones">
-                    <button class="editar">✏️</button>
-                    <button class="eliminar">🗑️</button>
-                </div>
-                </div>
-                </li>
-
-                <li>
-                <div class="tarea">
-                <div class="tarea-info">
-                    <input type="checkbox" />
-                    <div class="tarea-detalles">
-                    <span class="tarea-titulo">Estudiar para el examen</span>
-                    <span class="tarea-estado">Pendiente</span>
-                    </div>
-                </div>
-                <div class="tarea-acciones">
-                    <button class="editar">✏️</button>
-                    <button class="eliminar">🗑️</button>
-                </div>
-                </div>
-                </li>
-
-                <li>
-                <div class="tarea">
-                <div class="tarea-info">
-                    <input type="checkbox" />
-                    <div class="tarea-detalles">
-                    <span class="tarea-titulo">Estudiar para el examen</span>
-                    <span class="tarea-estado">Pendiente</span>
-                    </div>
-                </div>
-                <div class="tarea-acciones">
-                    <button class="editar">✏️</button>
-                    <button class="eliminar">🗑️</button>
-                </div>
-                </div>
-                </li>
-            </ul>
+    <header class="workspace-header">
+        <div class="title-container">
+            <h1 id="editable">Tablero Personal</h1>
+            <div class="editBtn btn">✎</div>
         </div>
-        <div class="addContainer">+</div>
+    </header>
+    <div class="notouchie">
+        <main class="main-workspace">
+            <div class="listsContainer">
+                
+            </div>
+            <div class="addlistContainer">
+                <div class="btn addList" id="addListBtn">+ Agregar una lista...</div>
+            </div>
+            
+        </main>
     </div>
 
     <script src="../src/js/nav.js"></script>
+    <script src="../src/js/editBtns.js"></script>
+    <script src="../src/js/workspace.js"></script>
 </body>
 </html>

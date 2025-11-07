@@ -96,19 +96,7 @@ body{
     background-color: #053225;
     color: white;
 }
-.editBtn{
-    height: 2.5rem !important;
-    width: 2.5rem !important;
-    border-radius: 50% !important;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 2rem;
-    background-color: #DEE5E5;
-    --btn-bg: #DEE5E5;
-}
+
 .bodyEdit{
     font-size: 2rem;
     height: 1.5rem !important;

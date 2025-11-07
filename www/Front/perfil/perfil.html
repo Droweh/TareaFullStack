@@ -73,32 +73,6 @@
             }
         })
 
-        const editButtons = document.querySelectorAll(".editBtn");
-
-        editButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                const editable = button.parentElement.querySelector("#editable");
-               
-                if(!editable) return;
-                const tag = editable.tagName;
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = editable.textContent;
-
-                editable.replaceWith(input);
-                input.focus();
-
-                input.addEventListener('keydown', e => {
-                    if (e.key === 'Enter') {
-                        const newElement = document.createElement(tag);
-                        newElement.id = 'editable';
-                        newElement.textContent = input.value;
-                        input.replaceWith(newElement);
-                    }
-                });
-            });
-        });
-
         const editPassBtn = document.querySelector("edit-pass");
         editPassBtn.addEventListener("click", () =>{
             alert("Under construction...");
