@@ -20,6 +20,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
     if (accion.status == "success") {
         alert("Cuenta registrada exitosamente");
+        window.location = "/Front/login&register/login.html";
     } else {
         alert("Hubo un error al registrar su cuenta");
     }

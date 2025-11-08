@@ -43,7 +43,7 @@ class Perfil extends Database {
             Datawall::forbidden,
             Datawall::all_match,
             [
-            "La contraseña o el correo ingresados no son validos" => fn($input) => 
+            "La contraseña ingresada no es valida" => fn($input) => 
             !empty($input['usuario']) && password_verify($input['contraseña'], $input['usuario']['contraseña'])
             ],
             "Perfil->accederUsuario()",
@@ -147,14 +147,14 @@ class Perfil extends Database {
         $correo = $credentials["correo"];
         $newname = $cambios["nombre"];
         $newapellido = $cambios["apellido"];
-        $contraseña = $cambios["contraseña"]["antigua"];
-        $newcontraseña = $cambios["contraseña"]["nueva"];
-
-        $contraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 
         $this->filtroRegistro->filter(["nombre" => $newname, "apellido" => $newapellido]);
 
         if (isset($cambios["contraseña"])) {
+            $contraseña = $cambios["contraseña"]["antigua"];
+            $newcontraseña = $cambios["contraseña"]["nueva"];
+            $newcontraseña = password_hash($newcontraseña, PASSWORD_DEFAULT);
+
             $this->filtroAcceso->filter(["contraseña" => $contraseña, "usuario" => $credentials]);
         }
 

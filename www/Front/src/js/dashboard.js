@@ -1,6 +1,8 @@
 const addContainer = document.querySelector(".addContainer");
 const tableroLista = document.querySelector("#lista");
 
+let tableros = [];
+
 function addTablero(lista) {
     // eliminar el botón + temporalmente
     const addBtn = lista.querySelector(".addContainer");
