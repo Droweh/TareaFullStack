@@ -184,7 +184,7 @@ class Tablero extends Database {
         $this->isCreador($token, $tableroId);
 
         $expira = new DateTime();
-        $expira->modify("+15 minutes");
+        $expira->modify("+1 day");
         $expira = $expira->format("Y-m-d H:m:s");
 
         $codigo = $perfil->generarCodigoAcceso();
