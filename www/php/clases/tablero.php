@@ -1,12 +1,11 @@
 <?php
-include "database.php";
 
 class Tablero extends Database {
 
     private Datawall $registroTablero;
 
     public function __construct() {
-        parent::__construct("database", "gbloomer", "gbloom_db", "goldenblosser", 3306);
+        parent::__construct("database", "tasker", "task_db", "taskertasking", 3306);
     
         $this->registroTablero = new Datawall(
             "Filtro de registro de tableros",
@@ -55,7 +54,7 @@ class Tablero extends Database {
         $eliminar = $this->pdo->prepare("delete from lista where tableroId = :tableroId;");
         $eliminar->execute(["tableroId" => $tableroId]);
 
-        $eliminar = $this->pdo->prepare("delete from tablero where tableroId = :tableroId;");
+        $eliminar = $this->pdo->prepare("delete from tablero where id = :tableroId;");
         $eliminar->execute(["tableroId" => $tableroId]);
 
         return $this->returnSuccess(null);
@@ -66,12 +65,12 @@ class Tablero extends Database {
         $this->registroTablero->filter($cambios);
 
         if (isset($cambios["nombre"])) {
-            $actualizar = $this->pdo->prepare("update tablero set nombre = :nombre where tableroId = :tableroId;");
+            $actualizar = $this->pdo->prepare("update tablero set nombre = :nombre where id = :tableroId;");
             $actualizar->execute(["nombre" => $cambios["nombre"], "tableroId" => $tableroId]);
         }
 
         if (isset($cambios["descripcion"])) {
-            $actualizar = $this->pdo->prepare("update tablero set descripcion = :descripcion where tableroId = :tableroId;");
+            $actualizar = $this->pdo->prepare("update tablero set descripcion = :descripcion where id = :tableroId;");
             $actualizar->execute(["descripcion" => $cambios["descripcion"], "tableroId" => $tableroId]);
         }
 
@@ -120,7 +119,7 @@ class Tablero extends Database {
 
         $this->notFound->setOrigin("Tablero->isCreador()");
         $this->notFound->setErrMessage("El usuario brindado no es el creador del tablero indicado");
-        $solicitud = $this->pdo->prepare("select creador from tablero where creador = :correo and tableroId = :tableroId");
+        $solicitud = $this->pdo->prepare(query: "select creador from tablero where creador = :correo and id = :tableroId");
         $solicitud->execute(["correo" => $correo, "tableroId" => $tableroId]);
 
         $this->notFound->filter($solicitud->fetch());
@@ -158,6 +157,16 @@ class Tablero extends Database {
         }
         
         return $this->returnSuccess($output);
+    }
+
+    public function getTableros(string $token): array {
+        $correo = $this->getUserCredentials($token)["result"]["correo"];
+
+        $solicitud = $this->pdo->prepare("select * from colaboraciones c join tablero t on c.tableroId = t.id where c.usuario = :correo;");
+        $solicitud->execute(["correo" => $correo]);
+        $listas = $solicitud->fetchAll();
+
+        return $this->returnSuccess($listas);
     }
 
     public function getCreador(string $token, int $tableroId): array {

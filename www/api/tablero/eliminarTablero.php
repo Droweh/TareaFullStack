@@ -6,37 +6,32 @@ $tablero = new Tablero();
 $request = $_SERVER["REQUEST_METHOD"];
 
 $filtroParametros = new Datawall(
-    "Parámetros Requeridos",
+    "Parámetros Opcionales",
     Datawall::notFound,
     Datawall::all_match,
     [
-        "El parametro 'nombre' es requerido" => fn($data) => isset($data['nombre'])
+        "sin_id" => fn($data) => isset($data["id"])
     ],
-    "Validación Parámetros",
-    true
+    "Validación Parámetros Edición",
+    true,
+    "No se han encontrado los parametros necesarios para la accion solicitada"
 );
 
 try {
     $filtroMetodoPost->filter($_SERVER["REQUEST_METHOD"]);
     $filtroTokenSesion->filter(true);
-    
+    $token = $_COOKIE["token"];
 
     $bodyInput = file_get_contents('php://input');
     $filtroBodyJSON->filter($bodyInput);
     $body = json_decode($bodyInput, true);
     
     $filtroParametros->filter($body);
-    
-    $nombre = $body["nombre"];
-    $token = $_COOKIE["token"];
+    $tableroId = $body["id"];
 
-    if (isset($body["descripcion"])) {
-        $register = $tablero->crearTablero($token, $nombre, $body["descripcion"]);
-    } else {
-        $register = $tablero->crearTablero($token, $nombre, ". . .");
-    }
+    $tableros = $tablero->eliminarTablero($token, $tableroId);
 
-    echo json_encode($tablero->returnSuccess(null));
+    echo json_encode($tablero->returnSuccess($tableros));
 } catch (Exception $e) {
     echo $e->getMessage();
 }
