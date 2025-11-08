@@ -2,18 +2,21 @@
 include "../../php/complementos/includeAll.php";
 include "../../php/complementos/filters.php";
 
-$tablero = new Tablero();
+$lista = new Lista();
 $request = $_SERVER["REQUEST_METHOD"];
 
 $filtroParametros = new Datawall(
-    "Parámetros Requeridos",
+    "Parámetros Opcionales",
     Datawall::notFound,
     Datawall::all_match,
     [
-        "El parametro 'nombre' es requerido" => fn($data) => isset($data['nombre'])
+        "titulo" => fn($data) => isset($data["titulo"]),
+        "nuevo_titulo" => fn($data) => isset($data["newTitulo"]),
+        "sin_id" => fn($data) => isset($data["tableroId"])
     ],
-    "Validación Parámetros",
-    true
+    "Validación Parámetros Edición",
+    true,
+    "No se han encontrado los parametros necesarios para la accion solicitada"
 );
 
 try {
@@ -27,16 +30,15 @@ try {
     
     $filtroParametros->filter($body);
     
-    $nombre = $body["nombre"];
     $token = $_COOKIE["token"];
 
-    if (isset($body["descripcion"])) {
-        $register = $tablero->crearTablero($token, $nombre, $body["descripcion"]);
-    } else {
-        $register = $tablero->crearTablero($token, $nombre, ". . .");
-    }
+    $tableroId = $body["tableroId"];
+    $titulo = $body["titulo"];
+    $newTitulo = $body["newTitulo"];
 
-    echo json_encode($tablero->returnSuccess($register["result"]));
+    $lista->editarLista($token, $titulo, $newTitulo, $tableroId);
+
+    echo json_encode($lista->returnSuccess(null));
 } catch (Exception $e) {
     echo $e->getMessage();
 }

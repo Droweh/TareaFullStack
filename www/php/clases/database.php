@@ -14,6 +14,8 @@ class Database {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ];
 
+        date_default_timezone_set('America/Montevideo');
+
         $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;port=$port;charset=utf8mb4",
             $username,
             $password,

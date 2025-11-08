@@ -13,7 +13,7 @@ class Tablero extends Database {
             Datawall::all_match,
             [
             "El nombre brindado es demasiado largo" => fn($input) => strlen($input['nombre'] ?? '') <= 32,
-            "La descripcion brindada es demasiado larga" => fn($input) => strlen($input['descripcion'] ?? '') <= 32
+            "La descripcion brindada es demasiado larga" => fn($input) => strlen($input['descripcion'] ?? '') <= 500
             ],
             "Gestion de Tableros",
             true
@@ -42,7 +42,7 @@ class Tablero extends Database {
         $insertar = $this->pdo->prepare("insert into colaboraciones(tableroId, usuario) values (:tableroId, :colaborador);");
         $insertar->execute(["tableroId" => $tableroId, "colaborador" => $correo]);
         
-        return $this->returnSuccess( null);
+        return $this->returnSuccess( $tableroId);
     }
 
     public function eliminarTablero(string $token, int $tableroId): array {
@@ -186,22 +186,23 @@ class Tablero extends Database {
         $expira = new DateTime();
         $expira->modify("+15 minutes");
         $expira = $expira->format("Y-m-d H:m:s");
+
         $codigo = $perfil->generarCodigoAcceso();
 
         $this->registrarCodigoTemporal($codigo, $correo, $expira);
 
-        $link = "https://" . $_SERVER['SERVER_NAME'] .  "api/tablero/joinInvite.php?codigo=" . $codigo . "&tablero=" . $tableroId;
+        $link = "https://" . $_SERVER['SERVER_NAME'] .  "/api/tablero/joinInvite.php?codigo=" . $codigo . "&tablero=" . $tableroId;
 
         return $this->returnSuccess($link);
     }
 
     public function comprobarLink(string $token, string $codigo, int $tableroId): array {
         $correo = $this->getUserCredentials($token)["result"]["correo"];
-        $creador = $this->verificarCodigoAcceso($codigo);
-
+        $creador = $this->verificarCodigoAcceso($codigo)["result"];
+        
         $this->notFound->setOrigin("Tablero->comprobarLink()");
         $this->notFound->setErrMessage("El link de invitacion es invalido");
-        $solicitud = $this->pdo->prepare("select creador from tablero where tableroId = :tableroId and creador = :creador;");
+        $solicitud = $this->pdo->prepare("select creador from tablero where id = :tableroId and creador = :creador;");
         $solicitud->execute(["tableroId" => $tableroId, "creador" => $creador]);
         $this->notFound->filter($solicitud->fetch());
 

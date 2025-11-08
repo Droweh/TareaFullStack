@@ -6,6 +6,7 @@ let antiguaContraseña;
 
 let nombreSpan = document.querySelector("#nombre>span");
 let apellidoSpan = document.querySelector("#apellido>span");
+let correoSpan = document.querySelector("#correo>h1");
 
 document.addEventListener("DOMContentLoaded", async () => {
     const credentials = await fetch("/api/perfil/credentials.php").then((response) => {
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     nombreSpan.textContent = nombre;
     apellidoSpan.textContent = apellido;
+    correoSpan.textContent = correo;
 });
 
 document.addEventListener('blur', function(event) {

@@ -2,6 +2,7 @@
 class Lista extends Tablero {
 
     private Datawall $registrarTarea;
+    private Datawall $editarTareas;
 
     public function __construct() {
         parent::__construct();
@@ -14,6 +15,38 @@ class Lista extends Tablero {
                 "Titulo demasiado largo" => fn($input) => strlen($input["titulo"]) <= 32,
                 "Fecha de inicio invalida" => fn($input) => ($d = DateTime::createFromFormat("Y-m-d", $input["fechaInicio"])) && $d->format("Y-m-d") === $input["fechaInicio"],
                 "Fecha de fin invalida" => fn($input) => ($d = DateTime::createFromFormat("Y-m-d", $input["fechaFin"])) && $d->format("Y-m-d") === $input["fechaFin"]
+            ],
+            "Lista Gestion de Tareas",
+            true,
+            "Los datos ingresados son invalidos"
+        );
+
+        $this->editarTareas = new Datawall (
+            "Filtro de registro de Tarea",
+            Datawall::forbidden,
+            Datawall::all_match,
+            [
+                "Titulo demasiado largo" => function($input) {
+                    if (isset($input["titulo"])) {
+                        return strlen($input["titulo"]) <= 32;
+                    } else {
+                        return true;
+                    }
+                },
+                "Fecha de inicio invalida" => function($input) {
+                    if (isset($input["fechaInicio"])) {
+                        return ($d = DateTime::createFromFormat("Y-m-d", $input["fechaInicio"])) && $d->format("Y-m-d") === $input["fechaInicio"];
+                    } else {
+                        return true;
+                    }
+                },
+                "Fecha de fin invalida" => function($input) {
+                    if (isset($input["fechaFin"])) {
+                        return ($d = DateTime::createFromFormat("Y-m-d", $input["fechaFin"])) && $d->format("Y-m-d") === $input["fechaFin"];
+                    } else {
+                        return true;
+                    }
+                }
             ],
             "Lista Gestion de Tareas",
             true,
@@ -75,6 +108,38 @@ class Lista extends Tablero {
 
         $insertar = $this->pdo->prepare("insert into tarea(titulo, lista, tableroId, fechaInicio, fechaFin, duracion) values (:titulo, :lista, :tableroId, :fechaInicio, :fechaFin, :duracion);");
         $insertar->execute(["titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId, "fechaInicio" => $fechaInicio, "fechaFin" => $fechaFin, "duracion" => $duracion]);
+
+        return $this->returnSuccess(null);
+    }
+
+    public function editarTarea(string $token, string $titulo, string $lista, int $tableroId, array $cambios): array {
+        $this->isColaborador($token, $tableroId);
+        $this->editarTareas->filter($cambios);
+
+        if (isset($cambios["titulo"])) {
+            $actualizar = $this->pdo->prepare("update tarea set titulo = :newtitulo where titulo = :titulo and lista = :lista and tableroId = :tableroId;");
+            $actualizar->execute(["newtitulo" => $cambios["titulo"], "titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId]);
+        }
+
+        if (isset($cambios["fechaInicio"])) {
+            $actualizar = $this->pdo->prepare("update tarea set fechaInicio = :fechaInicio where titulo = :titulo and lista = :lista and tableroId = :tableroId;");
+            $actualizar->execute(["fechaInicio" => $cambios["fechaInicio"], "titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId]);
+        }
+
+        if (isset($cambios["fechaFin"])) {
+            $actualizar = $this->pdo->prepare("update tarea set fechaFin = :fechaFin where titulo = :titulo and lista = :lista and tableroId = :tableroId;");
+            $actualizar->execute(["fechaFin" => $cambios["fechaFin"], "titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId]);
+        }
+
+        if (isset($cambios["duracion"])) {
+            $actualizar = $this->pdo->prepare("update tarea set duracion = :duracion where titulo = :titulo and lista = :lista and tableroId = :tableroId;");
+            $actualizar->execute(["duracion" => $cambios["duracion"], "titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId]);
+        }
+
+        if (isset($cambios["estado"])) {
+            $actualizar = $this->pdo->prepare("update tarea set estado = :estado where titulo = :titulo and lista = :lista and tableroId = :tableroId;");
+            $actualizar->execute(["estado" => (int) $cambios["estado"], "titulo" => $titulo, "lista" => $lista, "tableroId" => $tableroId]);
+        }
 
         return $this->returnSuccess(null);
     }

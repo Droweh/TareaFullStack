@@ -24,6 +24,7 @@ function renderizarTableros() {
         const tableroElement = document.createElement("div");
         tableroElement.classList.add("container");
         tableroElement.dataset.id = tablero.id;
+        console.log(tablero.id)
         
         tableroElement.innerHTML = `
             <div class="tablero-info">
@@ -70,7 +71,7 @@ async function eliminarTablero(tableroElement) {
             tableros = tableros.filter(t => t.id != tableroId);
             tableroElement.remove();
         } else {
-            alert("Hubo un error al eliminar el tablero");
+            alert(response.ErrMessage);
         }
     }
 }
@@ -120,16 +121,6 @@ function addTablero(lista) {
                 descripcion: descInput.value.trim()
             };
 
-            tablero.querySelector(".tablero-detalles").innerHTML = `
-                <a href="workspace.html?tablero=${nuevoTablero.id}">
-                    <span class="tablero-titulo">${nuevoTablero.nombre}</span>
-                </a>
-                <span class="tablero-desc">${nuevoTablero.descripcion}</span>`;
-            tablero.id = "";
-            tablero.dataset.id = nuevoTablero.id;
-            tablero.querySelector(".editar").addEventListener("click", () => editarTablero(tablero));
-            tablero.querySelector(".eliminar").addEventListener("click", () => eliminarTablero(tablero));
-
             const response = await fetch("/api/tablero/agregarTablero.php", {
                 method: "POST",
                 body: JSON.stringify({
@@ -141,15 +132,30 @@ function addTablero(lista) {
             });
 
             if (response.status === "success") {
-                if (response.result && response.result.id) {
-                    tablero.dataset.id = response.result.id;
-                    nuevoTablero.id = response.result.id;
+                if (response.result) {
+                    tablero.dataset.id = response.result;
+                    nuevoTablero.id = response.result;
                 }
                 tableros.push(nuevoTablero);
             } else {
-                alert("Hubo un error al agregar el tablero");
+                let errMessage = "";
+                response.ErrDetails.forEach(err => {
+                    errMessage += err + " ";
+                });
+
+                alert(errMessage);
                 tablero.remove();
             }
+
+            tablero.querySelector(".tablero-detalles").innerHTML = `
+                <a href="workspace.html?tablero=${nuevoTablero.id}">
+                    <span class="tablero-titulo">${nuevoTablero.nombre}</span>
+                </a>
+                <span class="tablero-desc">${nuevoTablero.descripcion}</span>`;
+            tablero.id = "";
+            tablero.dataset.id = nuevoTablero.id;
+            tablero.querySelector(".editar").addEventListener("click", () => editarTablero(tablero));
+            tablero.querySelector(".eliminar").addEventListener("click", () => eliminarTablero(tablero));
         } else {
             tablero.remove();
         }
@@ -231,7 +237,7 @@ function editarTablero(tablero) {
             });
 
             if (response.status !== "success") {
-                alert("Hubo un error al editar el tablero");
+                alert(response.ErrMessage);
             } else {
                 const tableroIndex = tableros.findIndex(t => t.id == tableroId);
                 if (tableroIndex !== -1) {

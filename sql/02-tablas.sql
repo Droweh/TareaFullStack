@@ -29,7 +29,7 @@ create table tablero (
     nombre varchar(32) not null,
     creador varchar(320) not null,
     fechaCreacion date not null,
-    descripcion varchar(200),
+    descripcion varchar(500),
     primary key (id),
     foreign key (creador) references usuario(correo)
 );

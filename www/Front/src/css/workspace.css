@@ -56,7 +56,6 @@ h1 {
     
     border-radius: 10px;
     background-color: #0532251c;
-    border: solid 10px #3D0B37;
     backdrop-filter: blur(15px);
     display: flex;
     flex-direction: row;

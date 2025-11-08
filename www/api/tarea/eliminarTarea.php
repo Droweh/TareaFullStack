@@ -2,7 +2,7 @@
 include "../../php/complementos/includeAll.php";
 include "../../php/complementos/filters.php";
 
-$tablero = new Tablero();
+$lista = new Lista();
 $request = $_SERVER["REQUEST_METHOD"];
 
 $filtroParametros = new Datawall(
@@ -10,7 +10,9 @@ $filtroParametros = new Datawall(
     Datawall::notFound,
     Datawall::all_match,
     [
-        "sin_id" => fn($data) => isset($data["id"])
+        "El parametro 'titulo' es requerido" => fn($data) => isset($data['titulo']),
+        "La solicitud debe contener el titulo de la lista" => fn($data) => isset($data["lista"]),
+        "La solicitud debe contener el id del tablero" => fn($data) => isset($data["tableroId"])
     ],
     "Validación Parámetros Edición",
     true,
@@ -27,11 +29,14 @@ try {
     $body = json_decode($bodyInput, true);
     
     $filtroParametros->filter($body);
-    $tableroId = $body["id"];
+    $titulo = $body["titulo"];
+    $tableroId = $body["tableroId"];
+    $listaId = $body["lista"];
+    $token = $_COOKIE["token"];
 
-    $tableros = $tablero->eliminarTablero($token, $tableroId);
+    $lista->quitarTarea($token, $titulo, $listaId, $tableroId);
 
-    echo json_encode($tablero->returnSuccess($tableros));
+    echo json_encode($lista->returnSuccess(null));
 } catch (Exception $e) {
     echo $e->getMessage();
 }
